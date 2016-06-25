@@ -42,39 +42,39 @@ import org.slf4j.event.SubstituteLoggingEvent;
  */
 public class SubstituteLoggerFactory implements ILoggerFactory {
 
-    boolean postInitialization = false;
-    
-    final Map<String, SubstituteLogger> loggers = new HashMap<String, SubstituteLogger>();
+	boolean postInitialization = false;
 
-    final LinkedBlockingQueue<SubstituteLoggingEvent> eventQueue = new LinkedBlockingQueue<SubstituteLoggingEvent>();
+	final Map<String, SubstituteLogger> loggers = new HashMap<String, SubstituteLogger>();
+	// 可以看这里的知识点：http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html
+	final LinkedBlockingQueue<SubstituteLoggingEvent> eventQueue = new LinkedBlockingQueue<SubstituteLoggingEvent>();
 
-    synchronized public  Logger getLogger(String name) {
-        SubstituteLogger logger = loggers.get(name);
-        if (logger == null) {
-            logger = new SubstituteLogger(name, eventQueue, postInitialization);
-            loggers.put(name, logger);
-        }
-        return logger;
-    }
+	synchronized public Logger getLogger(String name) {
+		SubstituteLogger logger = loggers.get(name);
+		if (logger == null) {
+			logger = new SubstituteLogger(name, eventQueue, postInitialization);
+			loggers.put(name, logger);
+		}
+		return logger;
+	}
 
-    public List<String> getLoggerNames() {
-        return new ArrayList<String>(loggers.keySet());
-    }
+	public List<String> getLoggerNames() {
+		return new ArrayList<String>(loggers.keySet());
+	}
 
-    public List<SubstituteLogger> getLoggers() {
-        return new ArrayList<SubstituteLogger>(loggers.values());
-    }
+	public List<SubstituteLogger> getLoggers() {
+		return new ArrayList<SubstituteLogger>(loggers.values());
+	}
 
-    public LinkedBlockingQueue<SubstituteLoggingEvent> getEventQueue() {
-        return eventQueue;
-    }
+	public LinkedBlockingQueue<SubstituteLoggingEvent> getEventQueue() {
+		return eventQueue;
+	}
 
-    public void postInitialization() {
-    	postInitialization = true;
-    }
-    
-    public void clear() {
-        loggers.clear();
-        eventQueue.clear();
-    }
+	public void postInitialization() {
+		postInitialization = true;
+	}
+
+	public void clear() {
+		loggers.clear();
+		eventQueue.clear();
+	}
 }
