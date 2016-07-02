@@ -78,7 +78,7 @@ public class LogManager
 	{
 		// By default we use a DefaultRepositorySelector which always returns 'h'.
 		Hierarchy h = new Hierarchy(new RootLogger((Level) Level.DEBUG));
-		repositorySelector = new DefaultRepositorySelector(h);
+		repositorySelector = new DefaultRepositorySelector(h);//包含仓库选择器，选择器里面包含层次。
 
 		/** Search for the properties file log4j.properties in the CLASSPATH.  */
 		String override = OptionConverter.getSystemProperty(DEFAULT_INIT_OVERRIDE_KEY, null);
@@ -204,7 +204,7 @@ public class LogManager
 			guard = null;
 			Exception ex = new IllegalStateException("Class invariant violation");
 			String msg = "log4j called after unloading, see http://logging.apache.org/log4j/1.2/faq.html#unload.";
-			if (isLikelySafeScenario(ex))
+			if (isLikelySafeScenario(ex))//这种写法非常厉害，谁在调用这个方法，则将堆栈写了出来
 			{
 				LogLog.debug(msg, ex);
 			}

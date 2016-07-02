@@ -26,6 +26,7 @@ import org.apache.log4j.spi.LoggerFactory;
   @since log4j 1.2
 
   @author Ceki G&uuml;lc&uuml; */
+//category类是logger的父类，log4j中都没有loggerFactory的。这个要注意的。
 public class Logger extends Category
 {
 

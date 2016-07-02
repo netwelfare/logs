@@ -64,6 +64,7 @@ import org.apache.log4j.spi.ThrowableRendererSupport;
  * @author Ceki G&uuml;lc&uuml;
  * 
  */
+//此类属于层次仓库
 public class Hierarchy
 		implements
 			LoggerRepository,

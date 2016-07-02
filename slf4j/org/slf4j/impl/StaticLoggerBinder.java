@@ -66,7 +66,7 @@ public class StaticLoggerBinder {
     public ILoggerFactory getLoggerFactory() {
         throw new UnsupportedOperationException("This code should never make it into slf4j-api.jar");
     }
-
+    //这个类的目的是仅仅为了报错，警告人们吗？这是什么设计模式呢？
     public String getLoggerFactoryClassStr() {
         throw new UnsupportedOperationException("This code should never make it into slf4j-api.jar");
     }

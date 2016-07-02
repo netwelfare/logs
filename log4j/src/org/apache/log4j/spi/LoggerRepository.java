@@ -36,6 +36,7 @@ import org.apache.log4j.Logger;
 
    @author Ceki G&uuml;lc&uuml;
    @since 1.2 */
+	//根本不知道这个类是干什么用的？
 public interface LoggerRepository {
 
   /**

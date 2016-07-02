@@ -55,6 +55,7 @@ package org.slf4j;
  * }
  * </pre>
  *
+ *真正的访问网址是：http://www.slf4j.org/faq.html#logging_performance
  * Be sure to read the FAQ entry relating to
  * <a href="../../../faq.html#logging_performance">parameterized logging</a>.
  * Note that logging statements can be parameterized in

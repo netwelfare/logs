@@ -101,7 +101,7 @@ public final class LoggerFactory {
      */
     static private final String[] API_COMPATIBILITY_LIST = new String[] { "1.6", "1.7" };
 
-    // private constructor prevents instantiation
+    // private constructor prevents instantiation，如果没有这个方法，则会从父类里面继承了初始化方法的。
     private LoggerFactory() {
     }
 
@@ -142,15 +142,15 @@ public final class LoggerFactory {
             Set<URL> staticLoggerBinderPathSet = null;
             // skip check under android, see also
             // http://jira.qos.ch/browse/SLF4J-328
-            if (!isAndroid()) {
+            if (!isAndroid()) {//如果不是安卓平台则执行下面代码
                 staticLoggerBinderPathSet = findPossibleStaticLoggerBinderPathSet();
                 reportMultipleBindingAmbiguity(staticLoggerBinderPathSet);
             }
             // the next line does the binding
             StaticLoggerBinder.getSingleton();
             INITIALIZATION_STATE = SUCCESSFUL_INITIALIZATION;
-            reportActualBinding(staticLoggerBinderPathSet);
-            fixSubstituteLoggers();
+            reportActualBinding(staticLoggerBinderPathSet);//报错
+            fixSubstituteLoggers();//应该都没有加载的
             replayEvents();
             // release all resources in SUBST_FACTORY
             SUBST_FACTORY.clear();
@@ -203,7 +203,7 @@ public final class LoggerFactory {
         final int maxDrain = 128;
         List<SubstituteLoggingEvent> eventList = new ArrayList<SubstituteLoggingEvent>(maxDrain);
         while (true) {
-            int numDrained = queue.drainTo(eventList, maxDrain);
+            int numDrained = queue.drainTo(eventList, maxDrain);//完全不懂干什么呢？
             if (numDrained == 0)
                 break;
             for (SubstituteLoggingEvent event : eventList) {
@@ -298,7 +298,7 @@ public final class LoggerFactory {
             ClassLoader loggerFactoryClassLoader = LoggerFactory.class.getClassLoader();
             Enumeration<URL> paths;
             if (loggerFactoryClassLoader == null) {
-                paths = ClassLoader.getSystemResources(STATIC_LOGGER_BINDER_PATH);
+                paths = ClassLoader.getSystemResources(STATIC_LOGGER_BINDER_PATH);//从系统类路径里面加载静态实现类
             } else {
                 paths = loggerFactoryClassLoader.getResources(STATIC_LOGGER_BINDER_PATH);
             }
